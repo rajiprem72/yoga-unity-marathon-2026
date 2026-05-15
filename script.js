@@ -28,10 +28,11 @@ document
 
     } catch (error) {
 
-      alert("Error submitting form.");
+  console.error(error);
 
-      console.error(error);
+  alert(
+    "Error submitting form.\n\n" +
+    error.message
+  );
 
-    }
-
-});
+}
