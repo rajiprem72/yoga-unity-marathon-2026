@@ -1,5 +1,5 @@
 const scriptURL = "https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
-
+                   
 document
   .getElementById("registrationForm")
   .addEventListener("submit", async function (e) {
@@ -14,6 +14,7 @@ document
 
       const response = await fetch(scriptURL, {
         method: "POST",
+        mode: "no-cors",
         body: formData
       });
 
