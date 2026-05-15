@@ -84,154 +84,209 @@
 
       <h2>Registration Form</h2>
 
-      <form id="registrationForm" method="POST">
 
-        <div class="form-group">
-          <label>Full Name</label>
-          <input 
-            type="text"
-            name="fullName"
-            required
-            minlength="3"
-            maxlength="50"
-            placeholder="Enter Full Name"
-          />
-        </div>
+   <form id="registrationForm" method="POST">
 
-        <div class="form-group">
-          <label>Date of Birth</label>
-          <input type="date" required>
-        </div>
+  <div class="form-group">
+    <label>Full Name</label>
+    <input 
+      type="text"
+      name="fullName"
+      required
+      minlength="3"
+      maxlength="50"
+      placeholder="Enter Full Name"
+    />
+  </div>
 
-        <div class="form-group">
-          <label>Age</label>
-          <input
-            type="number"
-            name="age"
-            required
-            min="5"
-            max="100"
-            placeholder="Enter Age"
-          />
-        </div>
+  <div class="form-group">
+    <label>Date of Birth</label>
+    <input
+      type="date"
+      name="dob"
+      required
+    >
+  </div>
 
-        <div class="form-group">
-          <label>Gender</label>
-          <select required>
-            <option value="">Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-        </div>
+  <div class="form-group">
+    <label>Age</label>
+    <input
+      type="number"
+      name="age"
+      required
+      min="5"
+      max="100"
+      placeholder="Enter Age"
+    />
+  </div>
 
-        <div class="form-group">
-          <label>Mobile Number</label>
-         <input
-            type="tel"
-            name="mobile"
-            required
-            pattern="[0-9]{10}"
-            maxlength="10"
-            minlength="10"
-            placeholder="10 Digit Mobile Number"
-          />
-        </div>
+  <div class="form-group">
+    <label>Gender</label>
 
-        <div class="form-group">
-          <label>WhatsApp Number</label>
-          <input
-              type="tel"
-              name="whatsapp"
-              required
-              pattern="[0-9]{10}"
-              maxlength="10"
-              minlength="10"
-              placeholder="10 Digit WhatsApp Number"
-            />
-        </div>
+    <select
+      name="gender"
+      required
+    >
+      <option value="">Select Gender</option>
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
 
-        <div class="form-group">
-          <label>Email ID</label>
-          <input
-            type="email"
-            name="email"
-            required
-            placeholder="Enter Valid Email ID"
-          />
-        </div>
+  </div>
 
-        <div class="form-group">
-          <label>City</label>
-          <input type="text" required>
-        </div>
+  <div class="form-group">
+    <label>Mobile Number</label>
 
-        <div class="form-group">
-          <label>Occupation</label>
-          <input type="text">
-        </div>
+    <input
+      type="tel"
+      name="mobile"
+      required
+      pattern="[0-9]{10}"
+      maxlength="10"
+      minlength="10"
+      placeholder="10 Digit Mobile Number"
+    />
 
-        <div class="form-group">
-          <label>Event Category</label>
+  </div>
 
-          <select required>
-            <option value="">Select Event</option>
-            <option>5K Run</option>
-            <option>3K Walkathon</option>
-          </select>
-        </div>
+  <div class="form-group">
+    <label>WhatsApp Number</label>
 
-        <div class="form-group">
-          <label>T-Shirt Size</label>
+    <input
+      type="tel"
+      name="whatsapp"
+      required
+      pattern="[0-9]{10}"
+      maxlength="10"
+      minlength="10"
+      placeholder="10 Digit WhatsApp Number"
+    />
 
-          <select required>
-            <option value="">Select Size</option>
-            <option>S</option>
-            <option>M</option>
-            <option>L</option>
-            <option>XL</option>
-            <option>XXL</option>
-          </select>
-        </div>
+  </div>
 
-        <div class="form-group">
-          <label>Emergency Contact Number</label>
-          <input
-            type="tel"
-            name="emergency"
-            required
-            pattern="[0-9]{10}"
-            maxlength="10"
-            minlength="10"
-            placeholder="Emergency Contact Number"
-          />
-        </div>
+  <div class="form-group">
+    <label>Email ID</label>
 
-        <div class="form-group full-width">
-          <label>Medical Condition (if any)</label>
-          <textarea rows="4"></textarea>
-        </div>
+    <input
+      type="email"
+      name="email"
+      required
+      placeholder="Enter Valid Email ID"
+    />
 
-        <div class="checkbox-group full-width">
+  </div>
 
-          <input type="checkbox" required>
+  <div class="form-group">
+    <label>City</label>
 
-          <label>
-            I confirm that I am medically fit to participate in the event.
-          </label>
+    <input
+      type="text"
+      name="city"
+      required
+      placeholder="Enter City"
+    />
 
-        </div>
+  </div>
 
-        <div class="full-width">
+  <div class="form-group">
+    <label>Occupation</label>
 
-          <button type="submit" class="submit-btn">
-            Register & Pay ₹599
-          </button>
+    <input
+      type="text"
+      name="occupation"
+      required
+      placeholder="Enter Occupation"
+    />
 
-        </div>
+  </div>
 
-      </form>
+  <div class="form-group">
 
+    <label>Event Category</label>
+
+    <select
+      name="eventCategory"
+      required
+    >
+      <option value="">Select Event</option>
+      <option value="5K Run">5K Run</option>
+      <option value="3K Walkathon">3K Walkathon</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+
+    <label>T-Shirt Size</label>
+
+    <select
+      name="tshirt"
+      required
+    >
+      <option value="">Select Size</option>
+      <option value="S">S</option>
+      <option value="M">M</option>
+      <option value="L">L</option>
+      <option value="XL">XL</option>
+      <option value="XXL">XXL</option>
+    </select>
+
+  </div>
+
+  <div class="form-group">
+
+    <label>Emergency Contact Number</label>
+
+    <input
+      type="tel"
+      name="emergency"
+      required
+      pattern="[0-9]{10}"
+      maxlength="10"
+      minlength="10"
+      placeholder="Emergency Contact Number"
+    />
+
+  </div>
+
+  <div class="form-group full-width">
+
+    <label>Medical Condition (if any)</label>
+
+    <textarea
+      name="medicalCondition"
+      rows="4"
+      placeholder="Enter Medical Condition"
+    ></textarea>
+
+  </div>
+
+  <div class="checkbox-group full-width">
+
+    <input
+      type="checkbox"
+      name="declaration"
+      value="Yes"
+      required
+    >
+
+    <label>
+      I confirm that I am medically fit to participate in the event.
+    </label>
+
+  </div>
+
+  <div class="full-width">
+
+    <button type="submit" class="submit-btn">
+      Register & Pay ₹599
+    </button>
+
+  </div>
+
+</form>
+      
     </div>
 
   </section>
