@@ -1,4 +1,5 @@
 console.log("script.js loaded");
+
 const scriptURL = "https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
 
 // Read referral code from URL
@@ -9,7 +10,6 @@ document
 .getElementById("registrationForm")
 .addEventListener("submit", async function (e) {
 
-```
 e.preventDefault();
 
 const form = e.target;
@@ -50,5 +50,4 @@ try {
   );
 
 }
-
 });
