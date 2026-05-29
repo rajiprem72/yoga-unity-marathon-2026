@@ -1,43 +1,53 @@
 const scriptURL = "https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
 
+// Read referral code from URL
+const urlParams = new URLSearchParams(window.location.search);
+const referralCode = urlParams.get("ref") || "";
+
 document
-  .getElementById("registrationForm")
-  .addEventListener("submit", async function (e) {
+.getElementById("registrationForm")
+.addEventListener("submit", async function (e) {
 
-    e.preventDefault();
+```
+e.preventDefault();
 
-    const form = e.target;
+const form = e.target;
 
-    const formData = new FormData(form);
+const formData = new FormData(form);
 
-    try {
+// Add referral code to submitted data
+formData.append("referralCode", referralCode);
 
-      await fetch(scriptURL, {
+console.log("Referral Code:", referralCode);
 
-        method: "POST",
+try {
 
-        mode: "no-cors",
+  await fetch(scriptURL, {
 
-        body: formData
+    method: "POST",
 
-      });
+    mode: "no-cors",
 
-      alert(
-        "Thank you for registering for YOGA UNITY MARATHON – 2026.\n\n" +
-        "You will receive Email and WhatsApp confirmation shortly."
-      );
+    body: formData
 
-      form.reset();
+  });
 
-    } catch (error) {
+  alert(
+    "Thank you for registering for YOGA UNITY MARATHON – 2026.\n\n" +
+    "You will receive Email and WhatsApp confirmation shortly."
+  );
 
-      console.error(error);
+  form.reset();
 
-      alert(
-        "Error submitting form.\n\n" +
-        error.message
-      );
+} catch (error) {
 
-    }
+  console.error(error);
+
+  alert(
+    "Error submitting form.\n\n" +
+    error.message
+  );
+
+}
 
 });
