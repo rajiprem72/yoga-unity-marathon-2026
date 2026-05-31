@@ -5,6 +5,27 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yn
 // Read referral code from URL
 const urlParams = new URLSearchParams(window.location.search);
 const referralCode = urlParams.get("ref") || "";
+if (referralCode) {
+
+  fetch(scriptURL, {
+
+    method: "POST",
+
+    mode: "no-cors",
+
+    headers: {
+      "Content-Type": "application/json"
+    },
+
+    body: JSON.stringify({
+      action: "visit",
+      ref: referralCode,
+      userAgent: navigator.userAgent
+    })
+
+  });
+
+}
 
 document
 .getElementById("registrationForm")
