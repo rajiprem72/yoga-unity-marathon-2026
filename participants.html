@@ -110,9 +110,21 @@ const API_URL =
 
 function loadStats(){
 
-    google.script.run
-    .withSuccessHandler(renderStats)
-    .getParticipantStats();
+    fetch(API_URL + "?action=stats")
+
+    .then(response => response.json())
+
+    .then(stats => {
+
+        renderStats(stats);
+
+    })
+
+    .catch(error => {
+
+        console.error("Stats Error:", error);
+
+    });
 
 }
 
