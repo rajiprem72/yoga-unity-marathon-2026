@@ -284,10 +284,11 @@ footer{
 }
 
 .stats-table td{
-    padding:12px;
-    text-align:center;
+    padding:10px;
     border:1px solid #ddd;
     font-weight:bold;
+    text-align:center !important;
+    vertical-align:middle;
 }
 
 .stats-title{
