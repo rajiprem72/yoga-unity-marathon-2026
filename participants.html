@@ -89,9 +89,18 @@ td{
 <div id="report"></div>
 
 <script>
-
 google.script.run
 .withSuccessHandler(renderReport)
+.withFailureHandler(function(error){
+
+    document.getElementById("report").innerHTML =
+      "<h3 style='color:red'>Error : "
+      + error.message +
+      "</h3>";
+
+    console.log(error);
+
+})
 .getParticipants();
 
 function renderReport(data){
