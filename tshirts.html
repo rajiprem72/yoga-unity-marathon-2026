@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>T-Shirt Statistics</title>
+
+<style>
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+}
+
+h1{
+    text-align:center;
+    color:#003366;
+    margin-bottom:30px;
+}
+
+.stats-box{
+    max-width:700px;
+    margin:auto;
+}
+
+.stats-title{
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+    color:#003366;
+    margin-bottom:15px;
+}
+
+.stats-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+.stats-table th{
+    background:#1976d2;
+    color:white;
+    padding:12px;
+    text-align:center;
+}
+
+.stats-table td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+    font-weight:bold;
+}
+
+.stats-table td:first-child{
+    text-align:left;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Yoga Unity Marathon 2026</h1>
+
+<div id="statsContainer">
+
+Loading T-Shirt Statistics...
+
+</div>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
+
+loadTShirtStats();
+
+function loadTShirtStats(){
+
+    fetch(API_URL + "?action=tshirtstats")
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        document.getElementById("statsContainer").innerHTML = `
+
+        <div class="stats-box">
+
+            <div class="stats-title">
+                T-Shirt Statistics
+            </div>
+
+            <table class="stats-table">
+
+                <tr>
+                    <th>Size</th>
+                    <th>PAID</th>
+                    <th>PENDING</th>
+                </tr>
+
+                <tr>
+                    <td>S</td>
+                    <td>${data.S.paid}</td>
+                    <td>${data.S.pending}</td>
+                </tr>
+
+                <tr>
+                    <td>M</td>
+                    <td>${data.M.paid}</td>
+                    <td>${data.M.pending}</td>
+                </tr>
+
+                <tr>
+                    <td>L</td>
+                    <td>${data.L.paid}</td>
+                    <td>${data.L.pending}</td>
+                </tr>
+
+                <tr>
+                    <td>XL</td>
+                    <td>${data.XL.paid}</td>
+                    <td>${data.XL.pending}</td>
+                </tr>
+
+                <tr>
+                    <td>XXL</td>
+                    <td>${data.XXL.paid}</td>
+                    <td>${data.XXL.pending}</td>
+                </tr>
+
+            </table>
+
+        </div>
+        `;
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("statsContainer").innerHTML =
+        "<h2 style='color:red'>Unable to load T-Shirt Statistics</h2>";
+
+        console.error(error);
+
+    });
+
+}
+
+</script>
+
+</body>
+
+</html>
