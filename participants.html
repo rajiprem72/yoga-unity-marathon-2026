@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Participants Report</title>
+<title>Yoga Unity Marathon Participants</title>
 
 <style>
 
 body{
+    margin:0;
+    padding:20px;
     font-family:Arial,sans-serif;
-    margin:20px;
-    background:#f5f5f5;
+    background:#f5f7fb;
 }
 
 h1{
     text-align:center;
     color:#003366;
-}
-
-.status-section{
-    margin-bottom:40px;
+    margin-bottom:30px;
 }
 
 .status-title{
@@ -58,16 +56,29 @@ td{
     border:1px solid #ddd;
 }
 
+.link{
+    color:#1976d2;
+    cursor:pointer;
+    font-weight:bold;
+    text-decoration:underline;
+}
+
 .details{
     display:none;
     background:#f9f9f9;
 }
 
-.link{
-    color:#1976d2;
-    cursor:pointer;
-    text-decoration:underline;
-    font-weight:bold;
+.loading{
+    text-align:center;
+    font-size:20px;
+    padding:50px;
+}
+
+.error{
+    text-align:center;
+    color:red;
+    font-size:18px;
+    padding:20px;
 }
 
 .detail-table{
@@ -86,86 +97,131 @@ td{
 
 <h1>Yoga Unity Marathon 2026 Participants</h1>
 
-<div id="report"></div>
+<div id="report">
+    <div class="loading">Loading Participants...</div>
+</div>
 
 <script>
-google.script.run
-.withSuccessHandler(renderReport)
-.withFailureHandler(function(error){
 
-    document.getElementById("report").innerHTML =
-      "<h3 style='color:red'>Error : "
-      + error.message +
-      "</h3>";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
 
-    console.log(error);
+loadParticipants();
 
-})
-.getParticipants();
+function loadParticipants(){
+
+    fetch(API_URL)
+
+    .then(response => response.json())
+
+    .then(data => {
+
+        renderReport(data);
+
+    })
+
+    .catch(error => {
+
+        document.getElementById("report").innerHTML =
+        "<div class='error'>Unable to load participant data</div>";
+
+        console.error(error);
+
+    });
+}
 
 function renderReport(data){
 
-    const report=document.getElementById("report");
+    const report =
+    document.getElementById("report");
 
-    const paid=data.filter(r =>
-        String(r["Payment Status"]).toUpperCase()=="PAID"
+    report.innerHTML="";
+
+    const paid =
+    data.filter(r =>
+        String(r["Payment Status"] || "")
+        .toUpperCase() === "PAID"
     );
 
-    const pending=data.filter(r =>
-        String(r["Payment Status"]).toUpperCase()!="PAID"
+    const pending =
+    data.filter(r =>
+        String(r["Payment Status"] || "")
+        .toUpperCase() !== "PAID"
     );
 
-    createStatusSection("PAID",paid);
-    createStatusSection("PENDING",pending);
+    createStatusSection(
+        report,
+        "PAID",
+        paid
+    );
+
+    createStatusSection(
+        report,
+        "PENDING",
+        pending
+    );
 }
 
-function createStatusSection(status,records){
+function createStatusSection(
+    container,
+    status,
+    data
+){
 
-    const report=document.getElementById("report");
+    const section =
+    document.createElement("div");
 
-    const div=document.createElement("div");
-    div.className="status-section";
-
-    div.innerHTML=
+    section.innerHTML =
     `<h2 class="status-title">${status}</h2>`;
 
-    report.appendChild(div);
+    container.appendChild(section);
 
     createCategory(
-        div,
+        section,
         "5K RUN",
-        records.filter(r =>
-            String(r["Event Category"]).toUpperCase().includes("5")
+        data.filter(r =>
+          String(r["Event Category"] || "")
+          .toUpperCase()
+          .includes("5")
         )
     );
 
     createCategory(
-        div,
+        section,
         "3K WALKATHON",
-        records.filter(r =>
-            String(r["Event Category"]).toUpperCase().includes("3")
+        data.filter(r =>
+          String(r["Event Category"] || "")
+          .toUpperCase()
+          .includes("3")
         )
     );
 }
 
-function createCategory(parent,title,data){
+function createCategory(
+    parent,
+    title,
+    data
+){
 
-    const category=document.createElement("div");
+    const div =
+    document.createElement("div");
 
-    category.innerHTML=
-    `<h3 class="category-title">${title} (${data.length})</h3>`;
+    div.innerHTML =
+    `<h3 class="category-title">
+      ${title} (${data.length})
+     </h3>`;
 
-    parent.appendChild(category);
+    parent.appendChild(div);
 
     if(data.length===0){
 
-        category.innerHTML+=
+        div.innerHTML +=
         "<p>No Participants</p>";
 
         return;
     }
 
-    let html=`
+    let html = `
     <table>
 
     <tr>
@@ -179,30 +235,28 @@ function createCategory(parent,title,data){
 
     data.forEach((row,index)=>{
 
-        const rowId=
-        title.replace(/\s/g,'')+
-        index+
-        Math.random();
+        const rowId =
+        "row_" +
+        title.replace(/\s/g,'') +
+        "_" +
+        index;
 
-        html+=`
+        html += `
 
         <tr>
 
         <td>
         <span
-          class="link"
-          onclick="toggleDetails('${rowId}')">
-          ${row["Participant ID"]}
+        class="link"
+        onclick="toggleDetails('${rowId}')">
+        ${row["Participant ID"] || ""}
         </span>
         </td>
 
-        <td>${row["Full Name"]||""}</td>
-
-        <td>${row["Mobile"]||""}</td>
-
-        <td>${row["WhatsApp"]||""}</td>
-
-        <td>${row["Email"]||""}</td>
+        <td>${row["Full Name"] || ""}</td>
+        <td>${row["Mobile"] || ""}</td>
+        <td>${row["WhatsApp"] || ""}</td>
+        <td>${row["Email"] || ""}</td>
 
         </tr>
 
@@ -214,65 +268,29 @@ function createCategory(parent,title,data){
 
          <table class="detail-table">
 
-         <tr>
-           <td><b>DOB</b></td>
-           <td>${row["DOB"]||""}</td>
-         </tr>
+         <tr><td><b>DOB</b></td><td>${row["DOB"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Age</b></td>
-           <td>${row["Age"]||""}</td>
-         </tr>
+         <tr><td><b>Age</b></td><td>${row["Age"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Gender</b></td>
-           <td>${row["Gender"]||""}</td>
-         </tr>
+         <tr><td><b>Gender</b></td><td>${row["Gender"] || ""}</td></tr>
 
-         <tr>
-           <td><b>City</b></td>
-           <td>${row["City"]||""}</td>
-         </tr>
+         <tr><td><b>City</b></td><td>${row["City"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Occupation</b></td>
-           <td>${row["Occupation"]||""}</td>
-         </tr>
+         <tr><td><b>Occupation</b></td><td>${row["Occupation"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Event Category</b></td>
-           <td>${row["Event Category"]||""}</td>
-         </tr>
+         <tr><td><b>Event Category</b></td><td>${row["Event Category"] || ""}</td></tr>
 
-         <tr>
-           <td><b>T-Shirt Size</b></td>
-           <td>${row["T-Shirt Size"]||""}</td>
-         </tr>
+         <tr><td><b>T-Shirt Size</b></td><td>${row["T-Shirt Size"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Emergency Contact</b></td>
-           <td>${row["Emergency Contact"]||""}</td>
-         </tr>
+         <tr><td><b>Emergency Contact</b></td><td>${row["Emergency Contact"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Medical Condition</b></td>
-           <td>${row["Medical Condition"]||""}</td>
-         </tr>
+         <tr><td><b>Medical Condition</b></td><td>${row["Medical Condition"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Declaration</b></td>
-           <td>${row["Declaration"]||""}</td>
-         </tr>
+         <tr><td><b>Declaration</b></td><td>${row["Declaration"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Payment ID</b></td>
-           <td>${row["Payment ID"]||""}</td>
-         </tr>
+         <tr><td><b>Payment ID</b></td><td>${row["Payment ID"] || ""}</td></tr>
 
-         <tr>
-           <td><b>Payment Date</b></td>
-           <td>${row["Payment Date"]||""}</td>
-         </tr>
+         <tr><td><b>Payment Date</b></td><td>${row["Payment Date"] || ""}</td></tr>
 
          </table>
 
@@ -282,19 +300,22 @@ function createCategory(parent,title,data){
         `;
     });
 
-    html+="</table>";
+    html += "</table>";
 
-    category.innerHTML+=html;
+    div.innerHTML += html;
 }
 
 function toggleDetails(id){
 
-    const row=document.getElementById(id);
+    const row =
+    document.getElementById(id);
 
     if(row.style.display==="table-row"){
+
         row.style.display="none";
-    }
-    else{
+
+    }else{
+
         row.style.display="table-row";
     }
 }
@@ -302,5 +323,4 @@ function toggleDetails(id){
 </script>
 
 </body>
-
 </html>
