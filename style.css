@@ -213,3 +213,54 @@ footer{
     display:block;
     border-radius:0;
 }
+/* ROUTE MAP SECTION */
+
+.route-map-section{
+    padding:60px 20px;
+    background:#f5f8ff;
+    text-align:center;
+}
+
+.route-map-container{
+    max-width:1000px;
+    margin:auto;
+    text-align:center;
+}
+
+.route-map-container h2{
+    font-size:2rem;
+    margin-bottom:15px;
+    color:#003366;
+}
+
+.route-description{
+    font-size:1.05rem;
+    margin-bottom:25px;
+    color:#555;
+    text-align:center;
+}
+
+.route-map-image{
+    width:100%;
+    max-width:700px;
+    border-radius:12px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.15);
+    display:block;
+    margin:0 auto;
+}
+
+.route-caption{
+    margin-top:25px;
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    text-align:center;
+}
+
+.route-caption p{
+    margin-bottom:12px;
+    line-height:1.8;
+    font-size:1rem;
+    text-align:center;
+}
