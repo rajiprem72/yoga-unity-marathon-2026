@@ -108,6 +108,52 @@ td{
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyhBwLFEeoi7qkLt3o2yng11lpHCeMmgjgbd4wdR1lGVxRNeSAg371Ne4uKFtLqYFcNZw/exec";
 
+function loadStats(){
+
+    google.script.run
+    .withSuccessHandler(renderStats)
+    .getParticipantStats();
+
+}
+
+function renderStats(stats){
+
+    document.getElementById("statsContainer").innerHTML = `
+
+    <div class="stats-box">
+
+      <div class="stats-title">
+        Participants Statistics
+      </div>
+
+      <table class="stats-table">
+
+        <tr>
+          <th></th>
+          <th>PAID</th>
+          <th>PENDING</th>
+        </tr>
+
+        <tr>
+          <td>5K RUN</td>
+          <td>${stats.run5k.paid}</td>
+          <td>${stats.run5k.pending}</td>
+        </tr>
+
+        <tr>
+          <td>3K WALKATHON</td>
+          <td>${stats.walk3k.paid}</td>
+          <td>${stats.walk3k.pending}</td>
+        </tr>
+
+      </table>
+
+    </div>
+    `;
+}
+    
+    
+loadStats();
 loadParticipants();
 
 function loadParticipants(){
