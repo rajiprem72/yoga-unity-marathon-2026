@@ -264,3 +264,35 @@ footer{
     font-size:1rem;
     text-align:center;
 }
+
+.stats-box{
+    max-width:600px;
+    margin:20px auto 40px auto;
+}
+
+.stats-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.stats-table th{
+    background:#003366;
+    color:white;
+    padding:12px;
+}
+
+.stats-table td{
+    padding:12px;
+    text-align:center;
+    border:1px solid #ddd;
+    font-weight:bold;
+}
+
+.stats-title{
+    text-align:center;
+    font-size:24px;
+    margin-bottom:10px;
+    color:#003366;
+}
