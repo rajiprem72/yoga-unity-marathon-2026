@@ -156,13 +156,22 @@ function renderStats(stats){
 loadStats();
 loadParticipants();
 
+
 function loadParticipants(){
 
-    fetch(API_URL)
+    document.getElementById("report").innerHTML =
+    "<h3>Loading participant data...</h3>";
+
+    fetch(API_URL + "?action=participants")
 
     .then(response => response.json())
 
     .then(data => {
+
+        console.log("Participants Loaded:", data);
+
+        document.getElementById("report").innerHTML =
+        "<h3>Total Records: " + data.length + "</h3>";
 
         renderReport(data);
 
@@ -170,14 +179,19 @@ function loadParticipants(){
 
     .catch(error => {
 
-        document.getElementById("report").innerHTML =
-        "<div class='error'>Unable to load participant data</div>";
-
         console.error(error);
 
+        document.getElementById("report").innerHTML =
+        "<h2 style='color:red'>Error: "
+        + error.message +
+        "</h2>";
+
     });
+
 }
 
+
+    
 function renderReport(data){
 
     const report =
