@@ -48,7 +48,7 @@
 
         <div class="info-box">
           <h3>Date</h3>
-          <p>Sunday, 28th June 2026</p>
+          <p>Sunday, 26th July 2026</p>
         </div>
 
         <div class="info-box">
@@ -135,6 +135,18 @@
     <div class="form-container">
 
       <h2>Registration Form</h2>
+<div style="
+      background:#ffebee;
+      color:#c62828;
+      padding:15px;
+      border-radius:8px;
+      margin-bottom:20px;
+      font-weight:bold;
+      text-align:center;
+      border:2px solid #ef9a9a;
+  ">
+    📢 Event Rescheduled: Yoga Unity Marathon - 2026 will now be held on Sunday, 26th July 2026. All existing registrations remain valid.
+  </div>
 
 
    <form id="registrationForm" method="POST">
@@ -354,6 +366,104 @@
     </p>
 
   </footer>
+<!-- EVENT RESCHEDULE POPUP -->
+
+<div id="eventPopup" class="popup-overlay">
+
+  <div class="popup-box">
+
+```
+<h2>📢 Event Rescheduled</h2>
+
+<p>
+  Due to unavoidable circumstances,
+  the <strong>Yoga Unity Marathon - 2026</strong>
+  has been rescheduled.
+</p>
+
+<p>
+  <strong>Original Date:</strong><br>
+  Sunday, 28th June 2026
+</p>
+
+<p>
+  <strong>New Date:</strong><br>
+  Sunday, 26th July 2026
+</p>
+
+<p>
+  All registrations remain valid.
+  No further action is required from participants.
+</p>
+
+<button onclick="closePopup()">
+  OK, I Understand
+</button>
+```
+
+  </div>
+
+</div>
+
+<style>
+
+.popup-overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.75);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.popup-box{
+    background:#fff;
+    width:90%;
+    max-width:500px;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(0,0,0,0.3);
+}
+
+.popup-box h2{
+    color:#d35400;
+    margin-bottom:15px;
+}
+
+.popup-box p{
+    margin:12px 0;
+    line-height:1.6;
+}
+
+.popup-box button{
+    margin-top:15px;
+    padding:12px 25px;
+    border:none;
+    background:#ff6600;
+    color:#fff;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.popup-box button:hover{
+    opacity:0.9;
+}
+
+</style>
+
+<script>
+
+function closePopup(){
+    document.getElementById("eventPopup").style.display = "none";
+}
+
+</script>
 
   <script src="script.js"></script>
 
